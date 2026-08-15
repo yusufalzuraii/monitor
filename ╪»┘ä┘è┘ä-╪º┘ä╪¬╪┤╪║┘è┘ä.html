@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>دليل تشغيل مراقب وفا</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#171a21; --card2:#1d212a; --line:#2a2f3a;
+    --tx:#e8eaed; --dim:#9aa3b2; --acc:#4ea1ff; --ok:#3fb950; --warn:#d29922; --err:#f85149;
+    --code:#0b0d11;
+  }
+  @media (prefers-color-scheme: light){
+    :root{ --bg:#f6f7f9; --card:#fff; --card2:#f0f2f5; --line:#dfe3e8;
+           --tx:#1a1d23; --dim:#5b6472; --code:#1a1d23; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:28px 16px 80px;background:var(--bg);color:var(--tx);
+       font-family:"Segoe UI",system-ui,-apple-system,"Noto Sans Arabic",Tahoma,sans-serif;
+       line-height:1.85;font-size:16px}
+  .wrap{max-width:820px;margin:0 auto}
+  h1{font-size:1.9rem;margin:0 0 6px;letter-spacing:-.02em}
+  .sub{color:var(--dim);margin:0 0 28px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:14px;
+        padding:20px 22px;margin:0 0 16px;position:relative}
+  .step h2{font-size:1.15rem;margin:0 0 14px;display:flex;align-items:center;gap:11px}
+  .n{background:var(--acc);color:#04101f;width:29px;height:29px;border-radius:50%;
+     display:inline-grid;place-items:center;font-size:.92rem;font-weight:700;flex:none}
+  .done{background:var(--ok)}
+  code{background:var(--card2);padding:2px 7px;border-radius:5px;
+       font-family:"Cascadia Code",Consolas,monospace;font-size:.87em;direction:ltr;
+       display:inline-block}
+  pre{background:var(--code);color:#e8eaed;padding:14px 16px;border-radius:10px;
+      overflow-x:auto;direction:ltr;text-align:left;font-size:.85rem;line-height:1.6;
+      border:1px solid var(--line);margin:10px 0}
+  pre code{background:none;padding:0;color:inherit;display:block}
+  ol,ul{padding-inline-start:22px;margin:10px 0}
+  li{margin:7px 0}
+  .note{border-inline-start:3px solid var(--acc);background:var(--card2);
+        padding:11px 15px;border-radius:0 9px 9px 0;margin:12px 0;font-size:.94rem}
+  .warn{border-color:var(--warn)}
+  .err{border-color:var(--err)}
+  .ok{border-color:var(--ok)}
+  .tag{font-size:.74rem;background:var(--card2);border:1px solid var(--line);
+       padding:2px 9px;border-radius:20px;color:var(--dim);margin-inline-start:auto;flex:none}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:right}
+  th{background:var(--card2);font-weight:600}
+  .kbd{background:var(--card2);border:1px solid var(--line);border-bottom-width:2px;
+       border-radius:5px;padding:1px 7px;font-size:.85em}
+  hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+  .final{background:linear-gradient(135deg,#1b3a2a,#17202b);border:1px solid #2c5c3f}
+  @media (prefers-color-scheme: light){ .final{background:#eefaf1;border-color:#bfe5cb} }
+  a{color:var(--acc)}
+</style>
+</head>
+<body><div class="wrap">
+
+<h1>دليل تشغيل مراقب وفا</h1>
+<p class="sub">من الملفات اللي عندك لنظام شغّال 24/7 — كل خطوة بالتفصيل</p>
+
+<div class="note ok">
+  <b>خلصت من:</b> إنشاء البوت ✓ &nbsp;•&nbsp; الحصول على chat id ✓ &nbsp;•&nbsp; اختبار الاستخراج ✓<br>
+  <b>باقي:</b> تحديث الملفات، اختبار تيلجرام، رفع على GitHub، إضافة المفاتيح، التشغيل.
+</div>
+
+<div class="step">
+  <h2><span class="n">1</span> حدّث الملفات <span class="tag">دقيقة</span></h2>
+  <ol>
+    <li>فك ضغط <code>wafa-monitor.zip</code> الجديد فوق مجلدك القديم — اختر <b>Replace / استبدال الكل</b>.</li>
+    <li>افتح <b>Command Prompt</b> بالمجلد وشغّل تأكيد أخير:</li>
+  </ol>
+<pre><code>cd C:\Users\yusuf\Desktop\wafa-monitor
+python monitor.py --test</code></pre>
+  <div class="note ok">
+    المفروض هلق كل الأخبار تطلع <b>الصورة : (لا يوجد)</b> ما عدا خبر «الأوامر العسكرية» —
+    لأن الباقي فعلاً بلا صور وكان بياخد الصورة الافتراضية <code>LargeDefualt.jpg</code> بالغلط.
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="n">2</span> تأكد إن تيلجرام شغّال <span class="tag">دقيقة</span></h2>
+  <p>بنفس نافذة الـ Command Prompt (بدّل القيم بتاعتك):</p>
+<pre><code>set TELEGRAM_BOT_TOKEN=7123456789:AAHdqTcv...
+set TELEGRAM_CHAT_ID=123456789
+python monitor.py --test-telegram</code></pre>
+  <div class="note ok">لازم توصلك رسالة <b>«✅ مراقب وفا — الإعدادات صحيحة»</b> على تيلجرام.</div>
+  <div class="note err">
+    لو طلع <code>chat not found</code> → ما ضغطت <b>Start</b> مع البوت، أو الـ chat id غلط.<br>
+    لو طلع <code>Unauthorized</code> → التوكن ناقص أو فيه مسافة زايدة.
+  </div>
+  <div class="note warn">
+    <b>لا تكمّل للخطوة الجاية قبل ما توصلك رسالة التجربة.</b> هيك بتتأكد إن المشكلة (لو صارت لاحقاً) مش من إعدادات البوت.
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="n">3</span> أنشئ ريبو على GitHub <span class="tag">دقيقتين</span></h2>
+  <ol>
+    <li>افتح <a href="https://github.com/new">github.com/new</a></li>
+    <li><b>Repository name:</b> <code>wafa-monitor</code></li>
+    <li>اختر <b>Public</b> ← مهم جداً، اقرأ التنبيه تحت</li>
+    <li>لا تأشّر على أي شي من <i>Add README</i> أو <i>.gitignore</i></li>
+    <li>اضغط <b>Create repository</b></li>
+  </ol>
+  <div class="note warn">
+    <b>ليش Public إجباري؟</b> عشان الفحص يصير كل دقيقتين، النظام بيفضل شغّال طول الوقت على GitHub.
+    الريبوهات <b>العامة دقائقها مجانية بلا حدود</b>، أما الخاصة فعندها 2000 دقيقة بالشهر —
+    رح تخلص خلال يومين ويوقف النظام.<br><br>
+    <b>هل في خطر؟</b> لا. التوكن والـ chat id بينحفظوا بـ <b>Secrets</b> (مشفّرة ومخفية)، مش بالكود.
+    اللي بيصير عام هو كود السكربت بس.
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="n">4</span> ارفع الملفات <span class="tag">دقيقتين</span></h2>
+  <p>بالـ Command Prompt جوّا المجلد (بدّل <code>USERNAME</code> باسم حسابك):</p>
+<pre><code>git init
+git add .
+git commit -m "wafa news monitor"
+git branch -M main
+git remote add origin https://github.com/USERNAME/wafa-monitor.git
+git push -u origin main</code></pre>
+  <div class="note">
+    أول مرة رح يطلب تسجيل دخول — بيفتح نافذة متصفح، سجّل دخول لحسابك وخلص.<br>
+    لو ما عندك git: نزّله من <a href="https://git-scm.com/download/win">git-scm.com</a> (Next → Next → Install).
+  </div>
+  <div class="note err">
+    لو طلع <code>remote origin already exists</code> شغّل:
+    <code>git remote set-url origin https://github.com/USERNAME/wafa-monitor.git</code>
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="n">5</span> حط المفاتيح بـ Secrets <span class="tag">دقيقتين</span></h2>
+  <p>من صفحة الريبو على GitHub:</p>
+  <p><b>Settings</b> ← <b>Secrets and variables</b> ← <b>Actions</b> ← زر <b>New repository secret</b></p>
+  <table>
+    <tr><th>Name</th><th>Secret</th></tr>
+    <tr><td><code>TELEGRAM_BOT_TOKEN</code></td><td>التوكن اللي من BotFather</td></tr>
+    <tr><td><code>TELEGRAM_CHAT_ID</code></td><td>الرقم تبعك</td></tr>
+  </table>
+  <div class="note">أضفهم <b>واحد واحد</b> — كل مرة تضغط <i>New repository secret</i> من جديد.</div>
+  <div class="note warn">
+    انتبه ما تحط مسافة قبل أو بعد القيمة وقت اللصق. وتأكد إن الاسم بالضبط زي الجدول (حروف كبيرة و <code>_</code>).
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="n">6</span> فعّل وشغّل <span class="tag">دقيقة</span></h2>
+  <ol>
+    <li>افتح تبويب <b>Actions</b> بالريبو</li>
+    <li>لو ظهرت رسالة صفراء، اضغط <b>I understand my workflows, go ahead and enable them</b></li>
+    <li>من القائمة اليسار اختر <b>مراقب أخبار وفا</b></li>
+    <li>يمين ← <b>Run workflow</b> ← <b>Run workflow</b></li>
+  </ol>
+  <div class="note ok">
+    <b>التشغيل الأول ما بيرسل ولا خبر</b> — هذا مقصود. بيسجّل الـ41 خبر الموجودين كـ«قديمة»
+    حتى ما ينفجر تيلجرامك. من بعدها أي خبر <b>جديد</b> بينزل على وفا بيوصلك خلال دقيقتين.
+  </div>
+  <div class="note">
+    اضغط على التشغيل الجاري لتشوف السجل الحي. رح تلاقي سطر
+    <code>▶️ تشغيل مستمر — فحص كل 120 ثانية، لمدة 14 دقيقة</code>
+  </div>
+</div>
+
+<div class="step">
+  <h2><span class="n">7</span> تأكد إنه فعلاً شغّال <span class="tag">بعد ساعة</span></h2>
+  <ul>
+    <li>ارجع لتبويب <b>Actions</b> — لازم تشوف تشغيلات متتالية بعلامة ✅ خضراء.</li>
+    <li>افتح ملف <code>state/seen.json</code> بالريبو — رقم <code>last_id</code> لازم يكبر مع الوقت.</li>
+    <li>أول خبر جديد ينزل على <a href="https://www.wafa.ps/Pages/LastNews">وفا</a> لازم يوصلك خلال دقيقتين.</li>
+  </ul>
+  <div class="note">
+    وفا بتنشر تقريباً 40-60 خبر باليوم، فأول خبر ممكن يوصلك خلال دقائق أو بعد نص ساعة حسب وقت النشر.
+  </div>
+</div>
+
+<hr>
+
+<h2 style="font-size:1.25rem">⏱️ كيف بيتحقق الفحص كل دقيقتين؟</h2>
+<p>جدولة GitHub أقل شي كل 5 دقائق، وبتتأخر أحياناً. فما اعتمدنا عليها للتوقيت:</p>
+<ul>
+  <li>كل تشغيل بيفضل <b>شغّال 14 دقيقة</b> وبيفحص وفا <b>كل دقيقتين</b> جوّاته.</li>
+  <li>الجدولة كل 15 دقيقة وظيفتها <b>إعادة تشغيل السلسلة</b> بس.</li>
+  <li>إعداد <code>concurrency</code> بيمنع تشغيل جولتين مع بعض — فما في رسائل مكررة.</li>
+</ul>
+<div class="note warn">
+  <b>بصراحة:</b> هالطريقة بتعطيك دقيقتين معظم الوقت، بس ساعة الازدحام ممكن تصير فجوة 5-15 دقيقة
+  لما GitHub يتأخر بتشغيل الجدولة. لو بدك دقيقتين <b>مضمونة 100%</b>، شوف الخيار تحت.
+</div>
+
+<h2 style="font-size:1.25rem">💻 خيار إضافي: تشغيل على جهازك (دقيقتين مضمونة)</h2>
+<p>أنشئ ملف <code>run.bat</code> جنب <code>monitor.py</code> وحط فيه:</p>
+<pre><code>@echo off
+cd /d "%~dp0"
+set TELEGRAM_BOT_TOKEN=التوكن_تبعك
+set TELEGRAM_CHAT_ID=الايدي_تبعك
+set POLL_SECONDS=120
+python monitor.py --loop</code></pre>
+<p>دبل كليك عليه ويفضل شغّال. لتشغيله تلقائياً مع الويندوز:
+<span class="kbd">Win</span> + <span class="kbd">R</span> ← اكتب <code>shell:startup</code> ← Enter ←
+انسخ اختصار لـ <code>run.bat</code> جوّا المجلد.</p>
+<div class="note err">
+  <b>لا تشغّل الاثنين مع بعض</b> (جهازك + GitHub) — عندهم ذاكرتين منفصلتين وكل خبر رح يوصلك مرتين.
+  اختار واحد: إما GitHub (24/7 بدون جهازك) أو جهازك (توقيت مضبوط بس لازم يضل شغّال).
+</div>
+
+<hr>
+
+<h2 style="font-size:1.25rem">🎛️ إعدادات تقدر تغيّرها لاحقاً</h2>
+<p>من <b>Settings ← Secrets and variables ← Actions ← تبويب Variables</b>:</p>
+<table>
+  <tr><th>المتغير</th><th>الافتراضي</th><th>الوظيفة</th></tr>
+  <tr><td><code>KEYWORDS</code></td><td>فاضي</td>
+      <td>فلترة الأخبار. مثال: <code>غزة,الضفة,القدس,الأسرى</code></td></tr>
+  <tr><td><code>MAX_BODY_CHARS</code></td><td><code>3500</code></td>
+      <td>أقصى طول للخبر بالرسالة. <code>0</code> = النص كامل مهما طال</td></tr>
+  <tr><td><code>SEND_IMAGES</code></td><td><code>1</code></td><td><code>0</code> = بدون صور</td></tr>
+  <tr><td><code>POLL_SECONDS</code></td><td><code>120</code></td><td>كل كم ثانية يفحص</td></tr>
+  <tr><td><code>MAX_PER_RUN</code></td><td><code>8</code></td><td>أقصى عدد رسائل بالجولة الوحدة</td></tr>
+</table>
+
+<h2 style="font-size:1.25rem">🆘 لو صارت مشكلة</h2>
+<table>
+  <tr><th>المشكلة</th><th>الحل</th></tr>
+  <tr><td>ما وصلني ولا خبر بعد ساعات</td>
+      <td>افتح Actions وشوف لو في ❌ حمراء. اضغط عليها واقرأ السطر الأحمر.</td></tr>
+  <tr><td>وصلتني أخبار مكررة</td>
+      <td>افحص خطوة «حفظ ذاكرة الأخبار» بالسجل — غالباً فشل الحفظ.</td></tr>
+  <tr><td>وصلتني صورة غلط</td>
+      <td>شغّل <code>python inspect_page.py</code> وابعتلي المخرجات.</td></tr>
+  <tr><td>الأخبار بتتأخر أكتر من 15 دقيقة</td>
+      <td>ازدحام على GitHub. لو صار دايم، حوّل للتشغيل على جهازك.</td></tr>
+  <tr><td>خطأ 403 من الموقع</td>
+      <td>Cloudflare رفض عنوان GitHub. السكربت بيعيد المحاولة لحاله؛ لو استمر حوّل لجهازك.</td></tr>
+</table>
+
+<div class="step final">
+  <h2><span class="n done">✓</span> خلصت</h2>
+  <p style="margin:0">
+    بعد ما تخلص الخطوات السبع، النظام بيفضل شغّال لحاله — بيفحص وفا كل دقيقتين، ٢٤ ساعة،
+    حتى لو جهازك مسكّر. أي خبر جديد بيوصلك بالعنوان والنص النظيف والمدينة ووقت النشر ورابط المصدر.
+  </p>
+</div>
+
+</div></body></html>

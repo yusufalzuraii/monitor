@@ -1,5 +1,7 @@
 {
  "seen": [
+  152449,
+  152448,
   152447,
   152446,
   152445,
@@ -288,9 +290,9 @@
   152149,
   152148
  ],
- "last_id": 152447,
+ "last_id": 152449,
  "bootstrapped": true,
- "updated_at": "2026-08-19T19:34:18+03:00",
+ "updated_at": "2026-08-19T20:07:53+03:00",
  "image_upgrade": {
   "/Small/|/Big/": false,
   "/Small/|/Large/": false,
